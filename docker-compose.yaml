@@ -1,0 +1,20 @@
+version: '3'
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./public:/public
+    restart: always
+  php:
+    build:
+      context: .
+      dockerfile: PHP.Dockerfile
+    volumes:
+      - ./public:/public
+      - ./composer.json:/composer.json
+    restart: always
+volumes:
+  site1: {}

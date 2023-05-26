@@ -1,0 +1,59 @@
+.game-board{
+    display: grid;
+    height: 800px;
+    width: 800px;
+    background-color: black;
+}
+.win{
+    background-color: #fff;
+
+    box-shadow: 0px 0px 0px 0px green;
+}
+.game-tile{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: blue;
+    background-color: white;
+    border: solid 10px black;
+}
+.banner{
+    height: 100px;
+    width: 800px;
+    font-size: 30px;
+    color: blue;
+    align-text: center;
+}
+.popup{
+    font-size: 30px;
+    position: absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    background-color: rgba(0,0,0,0.9);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.button-container{
+    display: flex;
+}
+.button{
+    margin-right: 20px;
+    margin-left: 20px;
+}
+.button:hover{
+    cursor: pointer;
+}
+.button:first-child{
+    margin-right: 10px;
+}
+.hidden{
+    display: none;
+}
