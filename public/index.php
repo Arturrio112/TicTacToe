@@ -1,6 +1,6 @@
 <?php
 
-require '../public/tic.php';
+require '../public/Tic.php';
 
 
 session_start();
@@ -11,22 +11,23 @@ $uri = $_SERVER['REQUEST_URI'];
 $filePath = '../public/index.html';
 
 
-if ($method == 'GET' && $uri == "/jaunais/") {
+if ($method == 'GET' && $uri == "/pc") {
   header('Content-Type: text/html');
   header('Content-Disposition: inline; filename="index.html"');
   
   readfile($filePath);
   exit;
 }
-if($method == 'GET' && $uri == "/multi/"){
+
+if ($method == 'GET' && $uri == "/multi") {
   header('Content-Type: text/html');
-  header('Content-Disposition: inline; filename="index.html"');
+  header('Content-Disposition: inline; filename="multi.html"');
   
   readfile('../public/multi.html');
   exit;
 }
 
-if ($method == 'POST' && $uri == "/jaunais/") {
+if ($method == 'POST' && $uri == "/pc") {
   $row = $_POST['row'];
   $col = $_POST['col'];
   $line = $_POST['line'];
@@ -39,7 +40,7 @@ if ($method == 'POST' && $uri == "/jaunais/") {
   echo json_encode($game->board);
 }
 
-if ($method == 'PUT' && $uri == "/jaunais/") {
+if ($method == 'PUT' && $uri == "/pc") {
   $inputData = json_decode(file_get_contents('php://input'), true);
 
   if (isset($inputData['i']) && isset($inputData['j'])) {

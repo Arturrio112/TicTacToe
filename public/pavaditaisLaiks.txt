@@ -1,4 +1,6 @@
 3diena Saku 14 beidzu 21 -> 7h
 4diena Saku 8 lidz 10 un 13 lidz 20 -> 9h
 5diena Saku 9 lidz 12 un 14 lidz 17 -> 6h 
-Kopa 24h (Socketus tapat nesanaca uztaisit)
+3diena saku 14 lidz 17 ->3h
+5diena saku 9 lidz 16 -> 7h
+Kopa 34h (Sockets ir, taču visu laiku connecto un disconnecto)

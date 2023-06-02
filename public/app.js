@@ -26,7 +26,7 @@ function boardLogic(board, gameBoard, banner){
                       };
                     
                     try{
-                        const res = await axios.put('http://tic.local:8080/jaunais/',
+                        const res = await axios.put('http://tic.local:8080/pc',
                          JSON.stringify(requestData), {
                             headers: {
                               'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ btn.addEventListener("click", async ()=>{
     formData.append('line', lineLength);
     
     try {
-        const response = await axios.post('http://tic.local:8080/jaunais/', formData,{
+        const response = await axios.post('http://tic.local:8080/pc', formData,{
         headers: {
             'Content-Type': 'multipart/form-data'
         }});
@@ -108,7 +108,7 @@ gameModeBtn.forEach((btn)=>{
             const modal = document.querySelector(".popup")
             modal.classList.add("hidden")
         }else{
-            window.location.replace("http://tic.local:8080/multi/")
+            window.location.replace("http://tic.local:8080/multi")
         }
     })
 })
