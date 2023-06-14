@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tic Tac Toe PHP</title>
   <link rel="stylesheet" href="/styles.css">
+  <script src="/multi.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
 </head>
 
@@ -28,71 +29,6 @@
     <div class="game-board">
 
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
-    <script>
-      const socket = io("ws://localhost:8081", {
-        transports: ["websocket"],
-        withCredentials: true,
-      });
-      let playerSym
-      let currSym
-      socket.on("make", function(e) {
-        console.log("got the res")
-        console.log(e)
-      })
-      socket.on("message", function(response) {
-        console.log("Received response:");
-        console.log(JSON.parse(response));
-      });
-
-      function makeBoard(board) {
-        board.innerHTML = ""
-        for (let i = 0; i < board.length; i++) {
-          for (let j = 0; j < board[i].length; j++) {
-            let div = document.createElement("div")
-            div.classList.add("game-tile")
-            div.setAttribute("x", i)
-            div.setAttribute("y", j)
-            div.addEventListener("click", () => {
-              if (board[i][j] !== " " && currSym !== playerSym) {
-                return
-              } else {
-                const requestData = {
-                  i: i,
-                  j: j,
-                }
-                div.innerText = playerSym
-                socket.on("move", JSON.stringify(requestData))
-              }
-            })
-            board.appendChild(div)
-          }
-        }
-      }
-
-      function displayWin(win, full) {
-        let banner = document.querySelector(".banner")
-        if (win) {
-          banner.innerText = `Player ${playerSym} HAS WON`
-        }
-        if (!win && full) {
-          banner.innerText = "It's a draw"
-        }
-      }
-      document.querySelector(".start").addEventListener("click", function() {
-        console.log("pressed")
-        const rows = document.querySelector(".rows-count").value
-        const cols = document.querySelector(".cols-count").value
-        const lineLength = document.querySelector(".line-length").value
-        const data = {
-          rows: rows,
-          cols: cols,
-          lineLength: lineLength
-        }
-        socket.emit("make", JSON.stringify(data))
-        document.querySelector(".join").disabled = true
-      })
-    </script>
 </body>
 
 </html>

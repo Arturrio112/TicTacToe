@@ -39,6 +39,51 @@ if ($method == 'POST' && $uri == "/pc") {
 
   echo json_encode($game->board);
 }
+if ($method == 'POST' && $uri == '/multi'){
+  if($_POST['action']=='start'){
+    $row = $_POST['row'];
+    $col = $_POST['col'];
+    $line = $_POST['line'];
+
+    $game = new Tic($row, $col, $line);
+
+    
+    $_SESSION['game'] = $game;
+
+    echo json_encode($game->board);
+  }
+  if($_POST['action']=='join'){
+    if(isset( $_SESSION['game']) && !empty( $_SESSION['game'])){
+      $game =$_SESSION['game'];
+
+      echo json_encode($game->board);
+    }
+  }
+}
+if($method == 'PUT' && $uri == "/multi"){
+  $inputData = json_decode(file_get_contents('php://input'), true);
+  if (isset($inputData['i']) && isset($inputData['j'])) {
+    $i = intval($inputData['i']);
+    $j = intval($inputData['j']);
+    $game = $_SESSION['game'];
+    $sym = $game->currMove;
+    $game->addToBoard($i, $j);
+    $win = $game->hasSomeoneWon($i, $j);
+    $full = $game->isBoardFull();
+    $over = $game->gameOver;
+    $_SESSION['game'] = $game;
+    echo json_encode(["win"=>$win,"over"=>$over, "full"=>$full, "board"=>$game->board]);
+  }else if(isset($inputData['check'])){
+    $game = $_SESSION['game'];
+    $full = $game->isBoardFull();
+    $over = $game->gameOver;
+    echo json_encode(["over"=>$over, "full"=>$full, "board"=>$game->board]);
+  }
+  else {
+    http_response_code(400); 
+    echo "Missing or invalid data";
+  }
+}
 
 if ($method == 'PUT' && $uri == "/pc") {
   $inputData = json_decode(file_get_contents('php://input'), true);
